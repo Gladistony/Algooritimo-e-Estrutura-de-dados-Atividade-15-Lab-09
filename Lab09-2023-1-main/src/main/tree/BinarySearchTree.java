@@ -1,5 +1,8 @@
 package tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import estrut.Tree;
 
 public class BinarySearchTree implements Tree{
@@ -120,23 +123,61 @@ public class BinarySearchTree implements Tree{
 
     @Override
     public int[] preOrdem() {
-        int[] resultado;
-        if (raiz == null) {
-            resultado = new int[0];
-        } else {
-            resultado = new int[1];
-            resultado[0] = raiz.getValor();
+        // Cria uma lista auxiliar para armazenar os valores
+        List<Integer> lista = new ArrayList<>();
+        // Chama o método recursivo passando a lista como parâmetro
+        preOrdemRecursivo(raiz, lista);
+        // Converte a lista em um array de inteiros e retorna
+        return lista.stream().mapToInt(i -> i).toArray();
+    }
+
+    // Método privado que percorre a árvore em pré-ordem de forma recursiva
+    private void preOrdemRecursivo(NoArvore no, List<Integer> lista) {
+        // Se o nó não é nulo, adiciona o valor do nó na lista, depois visita a subárvore esquerda, depois a subárvore direita
+        if (no != null) {
+        lista.add(no.getValor());
+        preOrdemRecursivo(no.getEsquerda(), lista);
+        preOrdemRecursivo(no.getDireita(), lista);
         }
     }
 
     @Override
     public int[] emOrdem() {
-        return new int[]{1,2};
+        // Cria uma lista auxiliar para armazenar os valores
+        List<Integer> lista = new ArrayList<>();
+        // Chama o método recursivo passando a lista como parâmetro
+        emOrdemRecursivo(raiz, lista);
+        // Converte a lista em um array de inteiros e retorna
+        return lista.stream().mapToInt(i -> i).toArray();
+    }
+
+    // Método privado que percorre a árvore em ordem de forma recursiva
+    private void emOrdemRecursivo(NoArvore no, List<Integer> lista) {
+        // Se o nó não é nulo, visita a subárvore esquerda, depois adiciona o valor do nó na lista, depois visita a subárvore direita
+        if (no != null) {
+        emOrdemRecursivo(no.getEsquerda(), lista);
+        lista.add(no.getValor());
+        emOrdemRecursivo(no.getDireita(), lista);
+        }
     }
 
     @Override
     public int[] posOrdem() {
-        return new int[]{1,2};
+        // Cria uma lista auxiliar para armazenar os valores
+        List<Integer> lista = new ArrayList<>();
+        // Chama o método recursivo passando a lista como parâmetro
+        posOrdemRecursivo(raiz, lista);
+        // Converte a lista em um array de inteiros e retorna
+        return lista.stream().mapToInt(i -> i).toArray();
     }
 
+    // Método privado que percorre a árvore em pós-ordem de forma recursiva
+    private void posOrdemRecursivo(NoArvore no, List<Integer> lista) {
+        // Se o nó não é nulo, visita a subárvore esquerda, depois a subárvore direita, depois adiciona o valor do nó na lista
+        if (no != null) {
+        posOrdemRecursivo(no.getEsquerda(), lista);
+        posOrdemRecursivo(no.getDireita(), lista);
+        lista.add(no.getValor());
+        }
+    }
 }
