@@ -6,6 +6,7 @@ public class NoArvore {
     private NoArvore direita;
     private NoArvore pai;
     private int altura;
+    private int balanceamento; // novo atributo para armazenar o fator de balanceamento
     //Construtor
     public NoArvore(int valor) {
         this.valor = valor;
@@ -13,6 +14,7 @@ public class NoArvore {
         this.direita = null;
         this.pai = null;
         this.altura = 0;
+        this.balanceamento = 0;
     }
     //Metodos Get
     public int getValor() {
@@ -33,6 +35,18 @@ public class NoArvore {
     }
     public void setValor(int minimo) {
         this.valor = minimo;
+    }
+    public void setPai(NoArvore raiz2) {
+        this.pai = raiz2;
+    }
+    public NoArvore getPai() {
+        return pai;
+    }
+    public void setBalanceamento(int i) {
+        this.balanceamento = i;
+    }
+    public int getBalanceamento() {
+        return balanceamento;
     }
 
 }
